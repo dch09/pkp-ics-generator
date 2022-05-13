@@ -1,5 +1,4 @@
 import pdfplumber
-from pprint import pprint
 from ics import Calendar, Event
 from datetime import datetime
 import pytz
@@ -45,7 +44,7 @@ def create_calendar(data):
 
     calendar = Calendar()
     event = Event()
-    event.name = f"{data['origin']} -> {data['destination']}"
+    event.name = f"{data['origin']} > {data['destination']}"
     event.begin, event.end = localize_datetimes(
         data['info']['departure_hour'], data['info']['arrival_hour'], data['info']['date'])
     event.description = f"Pociąg {data['info']['carrier']} {data['info']['train']}.\nWagon {data['info']['wagon']}, miejsce {data['info']['seats']}"
