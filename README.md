@@ -22,17 +22,34 @@ git clone https://github.com/dch09/pkp-ics-generator.git
 cd pkp-ics-generator
 ```
 
-Create and activate virtual environment:
+**Create and activate virtual environment**:
+
+---
+Using pyenv
 
 ```zsh
 pyenv virtualenv pkp-ics
 pyenv activate pkp-ics
 ```
+---
+Using venv
 
-Download [required packages](#packages):
+```zsh
+python3 -m venv pkp-ics
+source pkp-ics/bin/activate
+```
+
+---
+
+Download required packages:
 
 ```zsh
 pip install -r requirements.txt
 ```
 
+## Packages 📦
+- [ics](https://github.com/ics-py/ics-py)
+- [pdfplumber](https://github.com/jsvine/pdfplumber)
+- [Pillow](https://github.com/python-pillow/Pillow)
+- [pytz](https://pypi.org/project/pytz)
 
