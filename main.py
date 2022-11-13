@@ -161,7 +161,10 @@ def start():
         extracted_data = extract_data(input_path)
         calendar = create_calendar(extracted_data)
         save_calendar_to_file(calendar, output_path)
-        # TODO: success confirmation message
+
+        green_ansi = "\033[32m"
+        reset_ansi = f"\033[0m"
+        print(f"{green_ansi}Calendar event successfully created: {output_path}{reset_ansi}")
     else:
         print("Incorrect arguments were passed.")
 
