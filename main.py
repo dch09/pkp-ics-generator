@@ -71,23 +71,40 @@ def extract_data(filepath: str) -> dict:
     Extracts data from pdf file and returns a dictionary
     """
     def create_dict_from_table(table):
-        return {'departure_hour': table[1].split('-')[0].strip(),
-                'arrival_hour': table[1].split('-')[1].strip(),
-                'date': table[2],
-                'carrier': table[3].replace('\n', ' '),
-                'train': table[4].replace('\n', ' '),
-                'wagon': table[6],
-                'seats': table[7]}
+        departure_hour = table[1].split('-')[0].strip()
+        arrival_hour = table[1].split('-')[1].strip()
+        date = table[2]
+        carrier = table[3].replace('\n', ' ')
+        train = table[4].replace('\n', ' ')
+        wagon = table[6]
+        seats = table[7]
+        return {
+            'departure_hour': departure_hour,
+            'arrival_hour': arrival_hour,
+            'date': date,
+            'carrier': carrier,
+            'train': train,
+            'wagon': wagon,
+            'seats': seats
+        }
 
     table: dict
 
     with pdfplumber.open(filepath) as pdf:
         first_page = pdf.pages[0]
 
-        origin = first_page.extract_text().split('\n')[1].split('\n')[
-            0].split('  ')[0].strip()
-        destination = first_page.extract_text().split(
-            '\n')[1].split('\n')[0].split('  ')[1].strip()
+        origin = first_page.extract_text() \
+            .split('\n')[1] \
+            .split('\n')[0] \
+            .split('  ')[0] \
+            .strip()
+
+        destination = first_page.extract_text() \
+            .split('\n')[1] \
+            .split('\n')[0] \
+            .split('  ')[1] \
+            .strip()
+
         table = create_dict_from_table(first_page.extract_table()[1])
 
         return {'origin': origin, 'destination': destination, 'info': table}
@@ -164,7 +181,8 @@ def start():
 
         green_ansi = "\033[32m"
         reset_ansi = f"\033[0m"
-        print(f"{green_ansi}Calendar event successfully created: {output_path}{reset_ansi}")
+        print(
+            f"{green_ansi}Calendar event successfully created: {output_path}{reset_ansi}")
     else:
         print("Incorrect arguments were passed.")
 
